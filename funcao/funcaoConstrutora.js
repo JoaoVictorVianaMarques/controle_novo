@@ -1,4 +1,4 @@
-function Carro(velocidadeMaxima = 200, delta = 5){
+function Carro(velocidadeMaxima = 500, delta = 41){
     //atributo privado
     let VelocidadeAtual = 0
 
