@@ -16,11 +16,11 @@ const getTurma = (letra, callback) => {
     res.on('end', () => {
        try{
         resolve(JSON.parse(resultado))
-       } catch(e) {
-        reject(e)
-       }
-       })
-   })
+         } catch(e) {
+           reject(e)
+         }
+        })
+    })
 })
 }
  let nomes = []
