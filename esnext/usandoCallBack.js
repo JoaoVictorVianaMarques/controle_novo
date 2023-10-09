@@ -1,9 +1,12 @@
 // sem promise...
+const { rejects } = require('assert')
 const http = require('http')
+const { resolve } = require('path')
 
 const getTurma = (letra, callback) => {
     const url = `http://files.cod3r.com.br/curso-js/turma${letra}.json`
-http.get(url, res => {
+    return new Promise((resolve, reject) => {
+   http.get(url, res => {
     let resultado = ''
 
     res.on('data', dados => {
@@ -11,24 +14,34 @@ http.get(url, res => {
     })
 
     res.on('end', () => {
-        callback(JSON.parse(resultado))
+       try{
+        resolve(JSON.parse(resultado))
+       } catch(e) {
+        reject(e)
+       }
        })
    })
+})
 }
-
-let nomes = []
-getTurma('A', alunos => {
-    nomes = nomes.concat(alunos.map(a => `A: ${a.nome}`))
-    console.log(nomes)
-
-getTurma('B', alunos => {
+ let nomes = []
+ getTurma('A').then(alunos => {
+     nomes = nomes.concat(alunos.map(a => `A: ${a.nome}`))
+     console.log(nomes)
+ getTurma('B').then(alunos => {
     nomes = nomes.concat(alunos.map(a => `B: ${a.nome}`))
     console.log(nomes)
 
-getTurma('C', alunos => {
+ getTurma('C').then(alunos => {
     nomes = nomes.concat(alunos.map(a => `C: ${a.nome}`))
     console.log(nomes)
 
         })
     })
-})
+ })
+
+Promise.all([getTurma('A'), getTurma('B'), getTurma('C')])
+  .then(turmas => [].concat(...turmas))
+  .then(alunos => alunos.map(aluno => aluno.nome))
+  .then(nomes => console.log(nomes))
+
+getTurma('D').catch(e => console.log(e.message))
