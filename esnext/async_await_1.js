@@ -1,4 +1,3 @@
-const { AsyncLocalStorage } = require("async_hooks")
 
 function esperarPor(tempo = 2000) {
     return new Promise(function(resolve){
