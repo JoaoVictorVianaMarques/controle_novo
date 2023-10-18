@@ -4,25 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Exercicios HTML</title>
+    <style>
+        #conteudo {
+            padding: 10px;
+        }
+    </style>
 </head>
-<body>
+<body> 
     <header>     
-        
         <h1>Exercícios HTML</h1>
     </header>
     <nav>
-        <a href="exercicios/teste.html"> 00 - Teste </a> 
+        <a href wm-nav="exercicios/teste.html"> 00 - Teste </a> |
+        <a href wm-nav="exercicios/texto1.html"> 01 - Texto 1 </a> 
     </nav>
     <section id="conteudo"></section>
     <footer>
-        <br>
+        
         Curso de Web Moderno
+        
     </footer>
     <script> 
     document.querySelectorAll('a').forEach(link => {
         const conteudo = document.getElementById('conteudo')
 
-           link.onclick = function(e) {
+        link.onclick = function(e) {
            e.preventDefault()
            fetch(link.getAttribute('wm-nav'))
             .then(resp => resp.text())
