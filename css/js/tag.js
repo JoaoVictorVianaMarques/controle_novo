@@ -17,15 +17,15 @@ const colors = {
     }
 }
 
-document.querySelectorAll('.tag').forEach(element => {
-    const tagName = element.tagName.toLowerCase()
+document.querySelectorAll('.tag').forEach(elemento => {
+    const tagName = elemento.tagName.toLowerCase()
 
-    element.style.borderColor = colors
+    elemento.style.borderColor = colors.get(tagName)
 
-    if (!box.classList.contains('noLabel')) {
+    if (!elemento.classList.contains('noLabel')) {
         const label = document.createElement('label')
-        label.style.backgroundColor = '#616161'
+        label.style.backgroundColor = colors.get(tagName)
         label.innerHTML = tagName
-        element.insertBefore(label, element.childNodes[0])
+        elemento.insertBefore(label, elemento.childNodes[0])
     }
 })
